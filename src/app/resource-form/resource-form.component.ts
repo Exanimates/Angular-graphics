@@ -3,7 +3,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { DateAdapter, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -30,10 +30,6 @@ import { Resources } from '../types/resources';
   styleUrl: './resource-form.component.scss'
 })
 export class ResourceFormComponent {
-    @Input() inputLabel!: string;
-    @Input() dateLabel!: string;
-    @Input() headerTitle!: string;
-
     @Output() resourceSizeChange = new EventEmitter<Resources>();
 
     validationMessage: string = '';
@@ -55,6 +51,7 @@ export class ResourceFormComponent {
     }
 
     clear() {
+      this.validationMessage = '';
       this.resource = null;
       this.dateInputResource = null;
     }

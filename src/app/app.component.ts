@@ -5,6 +5,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { EChartsOption } from 'echarts';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {
     ChartComponent,
     ApexAxisChartSeries,
@@ -29,7 +30,7 @@ export type apexChartOptions = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgxEchartsDirective, MatCardModule, NgApexchartsModule, MatGridListModule, ResourceFormComponent],
+  imports: [RouterOutlet, NgxEchartsDirective, MatCardModule, NgApexchartsModule, MatGridListModule, ResourceFormComponent, MatFormFieldModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [

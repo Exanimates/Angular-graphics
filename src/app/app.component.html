@@ -39,10 +39,18 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile>
-        <resource-form (resourceSizeChange) = "coalChange($event)" inputLabel="Уголь (тонн)" dateLabel="Дата ввода данных (уголь)" headerTitle="Введите расход угля (тонн)"></resource-form>
+        <resource-form (resourceSizeChange) = "coalChange($event)">
+          <mat-card-title header>Введите расход угля (тонн)</mat-card-title>
+          <mat-label contentResourceInput>Уголь (тонн)</mat-label>
+          <mat-label contentDate>Дата ввода данных (уголь)</mat-label>
+        </resource-form>
       </mat-grid-tile>
       <mat-grid-tile>
-        <resource-form (resourceSizeChange) = "gasChange($event)" inputLabel="Природный газ (тыс. м3)" dateLabel="Дата ввода данных (газ)" headerTitle="Введите расход газа (тыс. м3)"></resource-form>
+        <resource-form (resourceSizeChange) = "gasChange($event)">
+          <mat-card-title header>Введите расход газа (тыс. м3)</mat-card-title>
+          <mat-label contentResourceInput>Природный газ (тыс. м3)</mat-label>
+          <mat-label contentDate>Дата ввода данных (газ)</mat-label>
+        </resource-form>
       </mat-grid-tile>
     </mat-grid-list>
     
