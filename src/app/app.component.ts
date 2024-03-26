@@ -47,19 +47,7 @@ export class AppComponent {
 
 
   title = 'Angular-graphics';
-  echartOption: EChartsOption = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [{
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'scatter'
-    }]
-  };
+  echartOption: EChartsOption = {};
 
   constructor() {
     this.apexOption = {
@@ -93,22 +81,63 @@ export class AppComponent {
           }
         }
       };
+
+      this.echartOption = {
+        xAxis: {
+          type: 'category',
+          data: this.categoriesData
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: this.apexDataGas,
+          type: 'scatter',
+          name: 'Выбросы CO2 газ'
+        }, {
+          data: this.apexDataFuel,
+          type: 'scatter',
+          name: 'Выбросы CO2 твер. топливо'
+        }]
+      };
   }
 
   coalChange(coal: Resources) {
-    console.log(coal);
-
     this.apexDataFuel.push(this.getEmissionsSolidFuel(parseFloat(coal.resource)));
 
+    this.updateEchart(coal.dateInputResource.toISOString());
     this.updateApexChart(coal.dateInputResource.toISOString());
   }
 
   gasChange(gas: Resources) {
-    console.log(gas);
-
     this.apexDataGas.push(this.getEmissionsGas(parseFloat(gas.resource)));
 
+    this.updateEchart(gas.dateInputResource.toISOString());
     this.updateApexChart(gas.dateInputResource.toISOString());
+  }
+
+  updateEchart(dateResource: string) {
+    this.echartOption = {
+      xAxis: {
+        type: 'category',
+        data: this.categoriesData
+      },
+      yAxis: {
+        type: 'value'
+      },
+      legend: {
+        data: ['Выбросы CO2 газ (тонн)', 'Выбросы CO2 твер. топливо (тонн)']
+      },
+      series: [{
+        data: this.apexDataGas,
+        type: 'scatter',
+        name: 'Выбросы CO2 газ (тонн)'
+      }, {
+        data: this.apexDataFuel,
+        type: 'scatter',
+        name: 'Выбросы CO2 твер. топливо (тонн)'
+      }]
+    };
   }
 
   updateApexChart(dateResource: string) {
@@ -118,11 +147,11 @@ export class AppComponent {
     this.apexOption = {
       series: [
         {
-          name: "Выбросы CO2 газ",
+          name: "Выбросы CO2 газ (тонн)",
           data: this.apexDataGas
         },
         {
-          name: "Выбросы CO2 твер. топливо",
+          name: "Выбросы CO2 твер. топливо (тонн)",
           data: this.apexDataFuel
         }
       ],
