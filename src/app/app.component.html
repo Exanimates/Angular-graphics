@@ -1,0 +1,36 @@
+<style>
+  .main {
+    .echarts {
+      margin-top: 10px;
+      width: 500px;
+    }
+    .apex {
+      margin-top: 10px;
+      width: 500px;
+    }
+  }
+</style>
+
+<main class="main">
+  <div class="content">
+    <mat-card class="echarts">
+      <mat-card-content>
+        <div echarts [options]="echartOption" class="demo-chart"></div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="apex">
+      <mat-card-content>
+        <apx-chart
+        [series]="apexOption.series!"
+        [chart]="apexOption.chart!"
+        [xaxis]="apexOption.xaxis!"
+        [stroke]="apexOption.stroke!"
+        [tooltip]="apexOption.tooltip!"
+        [dataLabels]="apexOption.dataLabels!"
+      ></apx-chart>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</main>
+<router-outlet />
