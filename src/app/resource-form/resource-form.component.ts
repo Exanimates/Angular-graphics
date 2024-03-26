@@ -36,10 +36,19 @@ export class ResourceFormComponent {
 
     @Output() resourceSizeChange = new EventEmitter<Resources>();
 
+    validationMessage: string = '';
+
     resource: (string | null) = null;
     dateInputResource: (Date | null) = null;
 
     save() {
+      if (parseFloat(this.resource!) < 0 || parseFloat(this.resource!) > 1000) {
+        this.validationMessage = 'Допустимое значение от 0 до 1000';
+        return;
+      }
+
+      this.validationMessage = '';
+
       if (this.resource != null && this.dateInputResource != null) {
         this.resourceSizeChange.emit({ resource: this.resource, dateInputResource: this.dateInputResource });
       }
