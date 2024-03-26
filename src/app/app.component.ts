@@ -40,6 +40,12 @@ export class AppComponent {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public apexOption: Partial<apexChartOptions>;
 
+  apexDataGas : Array<number> = [];
+  apexDataFuel : Array<number> = [];
+
+  categoriesData : Array<string> = ["2024-03-26","2024-03-27","2024-03-28","2024-03-29","2024-03-30","2024-03-31","2024-04-01"];
+
+
   title = 'Angular-graphics';
   echartOption: EChartsOption = {
     xAxis: {
@@ -60,11 +66,11 @@ export class AppComponent {
         series: [
           {
             name: "series1",
-            data: [31, 40, 28, 51, 42, 109, 100]
+            data: this.apexDataGas
           },
           {
             name: "series2",
-            data: [11, 32, 45, 32, 34, 52, 41]
+            data: this.apexDataFuel
           }
         ],
         chart: {
@@ -79,15 +85,7 @@ export class AppComponent {
         },
         xaxis: {
           type: "datetime",
-          categories: [
-            "2018-09-19T00:00:00.000Z",
-            "2018-09-19T01:30:00.000Z",
-            "2018-09-19T02:30:00.000Z",
-            "2018-09-19T03:30:00.000Z",
-            "2018-09-19T04:30:00.000Z",
-            "2018-09-19T05:30:00.000Z",
-            "2018-09-19T06:30:00.000Z"
-          ]
+          categories: this.categoriesData
         },
         tooltip: {
           x: {
@@ -99,10 +97,63 @@ export class AppComponent {
 
   coalChange(coal: Resources) {
     console.log(coal);
+
+    this.apexDataFuel.push(this.getEmissionsSolidFuel(parseFloat(coal.resource)));
+
+    this.updateApexChart(coal.dateInputResource.toISOString());
   }
 
   gasChange(gas: Resources) {
     console.log(gas);
+
+    this.apexDataGas.push(this.getEmissionsGas(parseFloat(gas.resource)));
+
+    this.updateApexChart(gas.dateInputResource.toISOString());
+  }
+
+  updateApexChart(dateResource: string) {
+
+    this.categoriesData.push(dateResource);
+
+    this.apexOption = {
+      series: [
+        {
+          name: "Выбросы CO2 газ",
+          data: this.apexDataGas
+        },
+        {
+          name: "Выбросы CO2 твер. топливо",
+          data: this.apexDataFuel
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "area"
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      xaxis: {
+        type: "datetime",
+        categories: this.categoriesData
+      },
+      tooltip: {
+        x: {
+          format: "dd/MM/yy HH:mm"
+        }
+      }
+    };
+  }
+
+  getEmissionsGas(gasResource: number) {
+    return (gasResource * 1.129) * 1.59;
+  }
+
+  getEmissionsSolidFuel(coalResource: number) {
+    return (coalResource * 0.768) * 2.76;
   }
 
 }
