@@ -40,8 +40,9 @@ export class AppComponent {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public apexOption: Partial<apexChartOptions>;
 
-  apexDataGas : Array<number> = [];
-  apexDataFuel : Array<number> = [];
+  apexDataGas: Array<number> = [];
+  apexDataFuel: Array<number> = [];
+  sumFuel: Array<number> = [];
 
   categoriesData : Array<string> = ["2024-03-26","2024-03-27","2024-03-28","2024-03-29","2024-03-30","2024-03-31","2024-04-01"];
 
@@ -117,6 +118,10 @@ export class AppComponent {
   }
 
   updateEchart(dateResource: string) {
+    this.categoriesData.push(dateResource);
+
+    const name = "Общая сумма выбросов CO2 (тонн) " + this.calculateSum(this.apexDataGas, this.apexDataFuel).toString();
+
     this.echartOption = {
       xAxis: {
         type: 'category',
@@ -126,7 +131,7 @@ export class AppComponent {
         type: 'value'
       },
       legend: {
-        data: ['Выбросы CO2 газ (тонн)', 'Выбросы CO2 твер. топливо (тонн)']
+        data: ['Выбросы CO2 газ (тонн)', 'Выбросы CO2 твер. топливо (тонн)', name]
       },
       series: [{
         data: this.apexDataGas,
@@ -136,6 +141,11 @@ export class AppComponent {
         data: this.apexDataFuel,
         type: 'scatter',
         name: 'Выбросы CO2 твер. топливо (тонн)'
+      }, 
+      {
+        data: [],
+        type: 'scatter',
+        name: name
       }]
     };
   }
@@ -143,6 +153,7 @@ export class AppComponent {
   updateApexChart(dateResource: string) {
 
     this.categoriesData.push(dateResource);
+    const name = "Общая сумма выбросов CO2 (тонн) " + this.calculateSum(this.apexDataGas, this.apexDataFuel).toString();
 
     this.apexOption = {
       series: [
@@ -153,6 +164,10 @@ export class AppComponent {
         {
           name: "Выбросы CO2 твер. топливо (тонн)",
           data: this.apexDataFuel
+        },
+        {
+          name: name,
+          data: []
         }
       ],
       chart: {
@@ -183,6 +198,23 @@ export class AppComponent {
 
   getEmissionsSolidFuel(coalResource: number) {
     return (coalResource * 0.768) * 2.76;
+  }
+
+  calculateSum(array1: number[], array2: number[]) {
+    const resultArray = [];
+
+    const minLength = Math.min(array1.length, array2.length);
+    for (let i = 0; i < minLength; i++) {
+        resultArray.push(array1[i] + array2[i]);
+    }
+
+    if (array1.length > minLength) {
+        resultArray.push(...array1.slice(minLength));
+    } else if (array2.length > minLength) {
+        resultArray.push(...array2.slice(minLength));
+    }
+
+    return resultArray;
   }
 
 }
