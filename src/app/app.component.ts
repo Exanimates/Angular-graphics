@@ -14,8 +14,10 @@ import {
     ApexTooltip,
     ApexStroke
 } from "ng-apexcharts";
+import { ResourceFormComponent } from './resource-form/resource-form.component';
+import { Resources } from './types/resources';
 
-export type ChartOptions = {
+export type apexChartOptions = {
     series: ApexAxisChartSeries;
     chart: ApexChart;
     xaxis: ApexXAxis;
@@ -27,7 +29,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgxEchartsDirective, MatCardModule, NgApexchartsModule, MatGridListModule],
+  imports: [RouterOutlet, NgxEchartsDirective, MatCardModule, NgApexchartsModule, MatGridListModule, ResourceFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [
@@ -36,7 +38,7 @@ export type ChartOptions = {
 })
 export class AppComponent {
   @ViewChild("chart") chart: ChartComponent | undefined;
-  public apexOption: Partial<ChartOptions>;
+  public apexOption: Partial<apexChartOptions>;
 
   title = 'Angular-graphics';
   echartOption: EChartsOption = {
@@ -94,4 +96,13 @@ export class AppComponent {
         }
       };
   }
+
+  coalChange(coal: Resources) {
+    console.log(coal);
+  }
+
+  gasChange(gas: Resources) {
+    console.log(gas);
+  }
+
 }

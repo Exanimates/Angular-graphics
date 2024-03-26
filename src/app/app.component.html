@@ -39,10 +39,10 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile>
-        Input coal consumption
+        <resource-form (resourceSizeChange) = "coalChange($event)" inputLabel="Уголь (тонн)" dateLabel="Дата ввода данных (уголь)" headerTitle="Введите расход угля (тонн)"></resource-form>
       </mat-grid-tile>
       <mat-grid-tile>
-        gas consumption
+        <resource-form (resourceSizeChange) = "gasChange($event)" inputLabel="Природный газ (тыс. м3)" dateLabel="Дата ввода данных (газ)" headerTitle="Введите расход газа (тыс. м3)"></resource-form>
       </mat-grid-tile>
     </mat-grid-list>
     

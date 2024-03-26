@@ -1,0 +1,31 @@
+<form class="resource-form">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>{{headerTitle}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="content">
+            <mat-grid-list cols="1" rowHeight="100px">
+                <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>{{inputLabel}}</mat-label>
+                        <input type="number" matInput [(ngModel)]="resource" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>{{dateLabel}}</mat-label>
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="dateInputResource" [ngModelOptions]="{standalone: true}">
+                        <mat-hint>DD/MM/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+        <mat-card-footer class="footer">
+            <button mat-raised-button class="button" (click)="clear()">Откатить</button>
+            <button mat-raised-button class="button" (click)="save()">Сохранить</button>
+        </mat-card-footer>
+    </mat-card>
+  </form>

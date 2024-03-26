@@ -1,0 +1,22 @@
+.resource-form {
+    .card {
+        height: 350px;
+        width: 500px;
+    }
+
+    .content {
+        .example-full-width {
+            width: 95%;
+        }
+    }
+    
+    .footer {
+        display: flex;
+        justify-content: right;
+    
+        .button {
+            margin-right: 35px;
+            margin-bottom: 30px;
+        }
+    }
+}
