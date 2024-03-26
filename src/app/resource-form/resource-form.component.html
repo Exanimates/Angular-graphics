@@ -16,7 +16,7 @@
                 <mat-grid-tile>
                     <mat-form-field class="example-full-width">
                         <ng-content select="[contentDate]"></ng-content>
-                        <input matInput [matDatepicker]="picker" [(ngModel)]="dateInputResource" [ngModelOptions]="{standalone: true}">
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [(ngModel)]="dateInputResource" [ngModelOptions]="{standalone: true}">
                         <mat-hint>DD/MM/YYYY</mat-hint>
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>

@@ -37,6 +37,8 @@ export class ResourceFormComponent {
     resource: (string | null) = null;
     dateInputResource: (Date | null) = null;
 
+    minDate: Date = new Date();
+
     save() {
       if (parseFloat(this.resource!) < 0 || parseFloat(this.resource!) > 1000) {
         this.validationMessage = 'Допустимое значение от 0 до 1000';
