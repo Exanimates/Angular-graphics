@@ -4,6 +4,7 @@ import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { EChartsOption } from 'echarts';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import {
     ChartComponent,
     ApexAxisChartSeries,
@@ -23,11 +24,10 @@ export type ChartOptions = {
     dataLabels: ApexDataLabels;
 };
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgxEchartsDirective, MatCardModule, NgApexchartsModule],
+  imports: [RouterOutlet, NgxEchartsDirective, MatCardModule, NgApexchartsModule, MatGridListModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [

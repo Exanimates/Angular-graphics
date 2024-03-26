@@ -1,5 +1,8 @@
 <style>
   .main {
+    .content {
+      height: 500px;
+    }
     .echarts {
       margin-top: 10px;
       width: 500px;
@@ -13,23 +16,36 @@
 
 <main class="main">
   <div class="content">
-    <mat-card class="echarts">
-      <mat-card-content>
-        <div echarts [options]="echartOption" class="demo-chart"></div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="apex">
-      <mat-card-content>
-        <apx-chart
-        [series]="apexOption.series!"
-        [chart]="apexOption.chart!"
-        [xaxis]="apexOption.xaxis!"
-        [stroke]="apexOption.stroke!"
-        [tooltip]="apexOption.tooltip!"
-        [dataLabels]="apexOption.dataLabels!"
-      ></apx-chart>
-      </mat-card-content>
-    </mat-card>
+    <mat-grid-list cols="2" rowHeight="450">
+      <mat-grid-tile>
+        <mat-card class="echarts">
+          <mat-card-content>
+            <div echarts [options]="echartOption" class="demo-chart"></div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-card class="apex">
+          <mat-card-content>
+            <apx-chart
+              [series]="apexOption.series!"
+              [chart]="apexOption.chart!"
+              [xaxis]="apexOption.xaxis!"
+              [stroke]="apexOption.stroke!"
+              [tooltip]="apexOption.tooltip!"
+              [dataLabels]="apexOption.dataLabels!"
+          ></apx-chart>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        Input coal consumption
+      </mat-grid-tile>
+      <mat-grid-tile>
+        gas consumption
+      </mat-grid-tile>
+    </mat-grid-list>
+    
 
   </div>
 </main>
